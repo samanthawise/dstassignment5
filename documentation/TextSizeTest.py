@@ -22,9 +22,9 @@ def Encrypt(data):
     ciphertext = f.encrypt(data)
     return(key, ciphertext)
 
-def Decrypt(key, ciphertext):
-    f = Fernet(key)
-    decrypttext = f.decrypt(ciphertext)
+def Decrypt(key_ciphertext):
+    f = Fernet(key_ciphertext[0])
+    decrypttext = f.decrypt(key_ciphertext[1])
     return(decrypttext)
 
 def Generator(Markov):
@@ -33,7 +33,8 @@ def Generator(Markov):
 data = Generator(m)
 data = bytes(data, encoding = "utf-8")
 key, ciphertext = Encrypt(data)
-decrypttext = Decrypt(key, ciphertext)
+key_ciphertext = [key, ciphertext]
+decrypttext = Decrypt(key_ciphertext)
 print(decrypttext)
 
 
@@ -45,11 +46,12 @@ start_time = time.time()
 dataset = []
 data = Generator(m)
 data = bytes(data, encoding = "utf-8")
-for i in range(100):
+for i in range(10000):
     dataset.append(data)
 #dataset = bytes(dataset, encoding = "utf-8")
 #dataset = list(map(functools.partial(bytes, encoding="utf-8"), dataset))
 test = list(map(Encrypt,dataset))
+decoded = list(map(Decrypt,test))
 
 end_time = time.time() - start_time
 print(end_time)
