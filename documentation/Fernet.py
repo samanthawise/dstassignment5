@@ -35,11 +35,13 @@ def Encrypt(filename):
             mykey.write(key)
         
 filename = []
-for i in range(3001,3030):
+for i in range(3001,5000):
     filename.append("%04d.txt"%i)
-
+import time
+start_time = time.time()
 list(map(Encrypt,filename))
-
+end_time = time.time() - start_time
+print("encode time",end_time)
 def Decrypt(filename):
     decrypt_filename = '../data/encoded_books/' + filename
     output_filename = '../data/decoded_books/' + filename
@@ -55,5 +57,7 @@ def Decrypt(filename):
         f = Fernet(key)
         
         out_file.write(f.decrypt(token))
-        
+start_time = time.time()        
 list(map(Decrypt,filename))
+end_time = time.time() - start_time
+print("decode time",end_time)
