@@ -1,3 +1,5 @@
+# Big data exploration
+
 # TODO list
 - [x] Select the encoding techniques 
   - Fernet(chosen) file2binary and encode binary
