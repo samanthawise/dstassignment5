@@ -29,23 +29,34 @@ def Decrypt(key_ciphertext):
 
 def Generator(Markov):
     return(Markov.babble(100000))
+def Generator_small(Markov):
+    return(Markov.babble(1000))
 
 # time calculate
 import matplotlib.pyplot as plt
-
+import random
+random.seed(4*7)
 import time
 import functools
 timesaver = []
+# Set a probability p
+p = 0.5
+# Generating data
+data = Generator(m)
+data = bytes(data, encoding = "utf-8")
+data_small = Generator_small(m)
+data_small = bytes(data_small, encoding = "utf-8")
 
-for j in range(1000,100000,10000):
-    start_time = time.time()
+for j in [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]:
     dataset = []
-    data = Generator(m)
-    data = bytes(data, encoding = "utf-8")
-    for i in range(j):
-        dataset.append(data)
-    #dataset = bytes(dataset, encoding = "utf-8")
-    #dataset = list(map(functools.partial(bytes, encoding="utf-8"), dataset))
+    for i in range(10000):
+        if random.uniform(0, 1)<j:
+            dataset.append(data_small)
+        else:
+            dataset.append(data)
+
+    start_time = time.time()
+    
     test = list(map(Encrypt,dataset))
     decoded = list(map(Decrypt,test))
 
@@ -53,5 +64,6 @@ for j in range(1000,100000,10000):
     print(end_time)
     timesaver.append(end_time)
 import pickle
-with open('../data/time_length_100000.pickle', 'wb') as f:
+with open('../data/time_with_prob.pickle', 'wb') as f:
     pickle.dump(timesaver, f)
+
