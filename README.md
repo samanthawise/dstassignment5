@@ -1,5 +1,20 @@
 # Big data exploration
+## Dataset Generating
+The Plan is to generate a dataset with following form:
 
+Username|Password|Password(md5 encrypted)|Messenges
+---|---|---|---
+xihajun|12345678|efw234rfdxfYIGUD|Some Fraud or ad
+...|...|...|...
+
+It is easy to do. Say we have a system with a big dataset, but it can be small in our simulation.
+- [ ] We need to send messenges when user login. And encrypt the users' messenges 
+Plan can be find some unmached password. Count the top frequent words in messenges. 
+
+Labelled Fraud or ad SMS and count the word or do prediction.
+
+Encode Messenges
+## 
 # TODO list
 - [x] Select the encoding techniques 
   - Fernet(chosen) file2binary and encode binary
