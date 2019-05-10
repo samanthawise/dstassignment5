@@ -1,4 +1,7 @@
 # Big data exploration
+
+This is what we have and we continue to do this for the next deadline you will give. Hopefully it will be after the exams, and we will submit our write up in [./report] folder as well.
+
 ## Dataset Generating
 The Plan is to generate a dataset with following form:
 
